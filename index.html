@@ -1,64 +1,163 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>YOUNID Demo</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bombobi Market Demo</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div id="app">
+    <header class="top-header">
+      <div class="logo">bombobi</div>
 
-<!-- 🔝 Header -->
-<header class="header">
-  <div class="logo">YOUNID</div>
-  <input class="search" placeholder="搜尋商品..." />
-  <div class="user">👤</div>
-</header>
+      <nav class="main-nav">
+        <a href="#">市場</a>
+        <a href="#">新聞</a>
+        <a href="#">分析</a>
+        <a href="#">圖表</a>
+        <a href="#">工具</a>
+      </nav>
 
-<!-- 🟡 Hero -->
-<section class="hero">
-  <div class="hero-left"></div>
-  <div class="hero-right">
-    <div class="small"></div>
-    <div class="small"></div>
+      <div class="header-actions">
+        <input type="text" placeholder="搜尋股票、商品、外匯..." />
+        <button>登入</button>
+      </div>
+    </header>
+
+    <section class="ticker-bar">
+      <div 
+        v-for="item in marketTicker" 
+        :key="item.name" 
+        class="ticker-item"
+      >
+        <span>{{ item.name }}</span>
+        <strong>{{ item.value }}</strong>
+        <em :class="item.change >= 0 ? 'up' : 'down'">
+          {{ item.change >= 0 ? '+' : '' }}{{ item.change }}%
+        </em>
+      </div>
+    </section>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <h3>市場分類</h3>
+        <a v-for="menu in menus" :key="menu" href="#">{{ menu }}</a>
+      </aside>
+
+      <section class="content">
+        <div class="hero-card">
+          <div>
+            <p class="tag">Market Overview</p>
+            <h1>全球市場即時概覽</h1>
+            <p>
+              此區塊資料未來可由 Laravel 12 API 提供，例如指數、股票、外匯、加密貨幣與新聞摘要。
+            </p>
+          </div>
+          <button>查看完整市場</button>
+        </div>
+
+        <section class="market-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>主要指數</h2>
+              <a href="#">更多</a>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>名稱</th>
+                  <th>最新價</th>
+                  <th>漲跌幅</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="stock in indices" :key="stock.name">
+                  <td>{{ stock.name }}</td>
+                  <td>{{ stock.price }}</td>
+                  <td :class="stock.change >= 0 ? 'up' : 'down'">
+                    {{ stock.change >= 0 ? '+' : '' }}{{ stock.change }}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>熱門商品</h2>
+              <a href="#">更多</a>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>商品</th>
+                  <th>價格</th>
+                  <th>漲跌幅</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in commodities" :key="item.name">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.price }}</td>
+                  <td :class="item.change >= 0 ? 'up' : 'down'">
+                    {{ item.change >= 0 ? '+' : '' }}{{ item.change }}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="panel-head">
+            <h2>最新金融新聞</h2>
+            <a href="#">全部新聞</a>
+          </div>
+
+          <article 
+            v-for="news in newsList" 
+            :key="news.title" 
+            class="news-card"
+          >
+            <div class="news-thumb"></div>
+            <div>
+              <p class="news-category">{{ news.category }}</p>
+              <h3>{{ news.title }}</h3>
+              <p>{{ news.desc }}</p>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="rightbar">
+        <div class="watchlist panel">
+          <h2>我的觀察清單</h2>
+
+          <div 
+            v-for="item in watchlist" 
+            :key="item.name" 
+            class="watch-item"
+          >
+            <span>{{ item.name }}</span>
+            <strong>{{ item.price }}</strong>
+            <em :class="item.change >= 0 ? 'up' : 'down'">
+              {{ item.change >= 0 ? '+' : '' }}{{ item.change }}%
+            </em>
+          </div>
+        </div>
+
+        <div class="ad-box">
+          Laravel API<br />
+          廣告 / 推薦內容預留
+        </div>
+      </aside>
+    </main>
   </div>
-</section>
 
-<!-- 🛍 商品區 -->
-<section class="products">
-  <h2>最新上架</h2>
-  <div class="grid">
-
-    <div class="card">
-      <img src="https://picsum.photos/200" />
-      <p>商品名稱</p>
-      <span class="hot">HOT</span>
-    </div>
-
-    <div class="card">
-      <img src="https://picsum.photos/201" />
-      <p>商品名稱</p>
-    </div>
-
-    <div class="card">
-      <img src="https://picsum.photos/202" />
-      <p>商品名稱</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- 🎯 CTA區 -->
-<section class="cta">
-  <div class="cta-card">全台最多電商使用</div>
-  <div class="cta-card">商品開發更簡單</div>
-  <div class="cta-card">經營工具最齊全</div>
-</section>
-
-<!-- 🔻 Footer -->
-<footer class="footer">
-  <p>© YOUNID</p>
-</footer>
-
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
