@@ -1,42 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YOUNID 團隊介紹</title>
+  <title>YOUNID Demo</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <section class="hero">
-    <h1>YOUNID 團隊介紹</h1>
-    <p>我們用設計、技術、業務與客服，陪伴電商團隊更有效率地成長。</p>
-  </section>
+<!-- 🔝 Header -->
+<header class="header">
+  <div class="logo">YOUNID</div>
+  <input class="search" placeholder="搜尋商品..." />
+  <div class="user">👤</div>
+</header>
 
-  <section class="team">
+<!-- 🟡 Hero -->
+<section class="hero">
+  <div class="hero-left"></div>
+  <div class="hero-right">
+    <div class="small"></div>
+    <div class="small"></div>
+  </div>
+</section>
+
+<!-- 🛍 商品區 -->
+<section class="products">
+  <h2>最新上架</h2>
+  <div class="grid">
+
     <div class="card">
-      <h2>悠醬</h2>
-      <p>溫柔細心的設計師，負責打造清楚、好看的使用體驗。</p>
+      <img src="https://picsum.photos/200" />
+      <p>商品名稱</p>
+      <span class="hot">HOT</span>
     </div>
 
     <div class="card">
-      <h2>勇哥</h2>
-      <p>邏輯強大的工程師，負責讓系統穩定、快速又可靠。</p>
+      <img src="https://picsum.photos/201" />
+      <p>商品名稱</p>
     </div>
 
     <div class="card">
-      <h2>妮姊</h2>
-      <p>精準溝通的業務，協助客戶找到最適合的解決方案。</p>
+      <img src="https://picsum.photos/202" />
+      <p>商品名稱</p>
     </div>
 
-    <div class="card">
-      <h2>小迪</h2>
-      <p>親切可靠的客服，細心陪伴客戶解決每一個問題。</p>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <button onclick="sayHello()">了解 YOUNID</button>
+<!-- 🎯 CTA區 -->
+<section class="cta">
+  <div class="cta-card">全台最多電商使用</div>
+  <div class="cta-card">商品開發更簡單</div>
+  <div class="cta-card">經營工具最齊全</div>
+</section>
 
-  <script src="script.js"></script>
+<!-- 🔻 Footer -->
+<footer class="footer">
+  <p>© YOUNID</p>
+</footer>
+
 </body>
 </html>
